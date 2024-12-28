@@ -5,9 +5,10 @@ import { ThemeProvider } from "./components/theme-provider";
 import CustomCursor from "./components/CustomCursor";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
+import Nav, { Top } from "./components/Nav";
 
 function App() {
-  const heroRef = useRef<HTMLElement>(null);
+  const homeRef = useRef<HTMLElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
@@ -17,9 +18,10 @@ function App() {
     const handleScroll = () => {
       const scrolled = window.scrollY;
 
-      if (heroRef.current) {
-        heroRef.current.style.transform = `translateY(${scrolled * 0.5}px)`;
+      if (homeRef.current) {
+        homeRef.current.style.transform = `translateY(${scrolled * -0.1}px)`;
       }
+
       if (aboutRef.current) {
         aboutRef.current.style.transform = `translateY(${
           (scrolled - aboutRef.current.offsetTop) * 0.2
@@ -43,9 +45,11 @@ function App() {
 
   return (
     <div>
+      <Nav />
+      <Top />
       <CustomCursor />
       <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-        <section id="hero" ref={heroRef}>
+        <section id="home" ref={homeRef}>
           <Hero />
         </section>
         <section id="about" ref={aboutRef}>

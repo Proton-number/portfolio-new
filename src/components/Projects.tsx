@@ -1,16 +1,46 @@
+import { Card } from "./ui/card";
+// import Image from "next/image";
+
+interface project {
+  title: string;
+  description: string;
+}
+
 function Projects() {
+  const project: Array<project> = [
+    {
+      title: "Portfolio Website",
+      description:
+        "Personal portfolio website built with Next.js and TypeScript",
+    },
+    {
+      title: "E-Commerce Platform",
+      description: "Full-stack e-commerce solution with React and Node.js",
+    },
+    {
+      title: "Weather App",
+      description:
+        "Real-time weather application using weather API integration",
+    },
+    {
+      title: "Task Manager",
+      description:
+        "Simple and efficient task management application with React",
+    },
+  ];
+
   return (
-    <div className="min-h-screen flex items-center py-32">
-      This is the Projects component Lorem ipsum dolor sit amet consectetur
-      adipisicing elit. Quis aspernatur porro dolorum unde maxime nulla eos ea
-      autem voluptates molestiae consequuntur amet, tempora maiores temporibus,
-      culpa quod ipsam pariatur alias? Suscipit aliquam voluptatem sequi nam
-      distinctio tenetur, blanditiis ad, ullam totam esse inventore reiciendis
-      saepe cumque consectetur laborum earum nostrum culpa labore consequatur
-      excepturi dolore dolores nemo qui alias. Id. Tempora maxime nostrum nobis
-      ipsam quis explicabo vitae odio beatae, dolor ad cumque expedita fugit
-      molestiae aliquid distinctio minus dolorem ducimus modi quia nihil fugiat,
-      impedit doloribus nisi rerum. Quibusdam. Quisquam, quidem. Quisquamld
+    <div className="min-h-screen flex flex-col items-center justify-center py-32">
+      <h1 className="font-bold text-8xl mb-4">PROJECTS</h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-40 mt-20 p-6 ">
+        {project.map((item, index) => (
+          <Card key={index} className="border-none">
+            <h3>{item.title}</h3>
+            <h3>{item.description}</h3>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
