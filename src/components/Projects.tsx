@@ -1,43 +1,61 @@
-import { Card } from "./ui/card";
-// import Image from "next/image";
-
-interface project {
-  title: string;
-  description: string;
-}
+import { useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { sanityStore } from "@/Store/sanityStore";
+import { appStore } from "@/Store/appStore";
+import { PortableText } from "@portabletext/react";
 
 function Projects() {
-  const project: Array<project> = [
-    {
-      title: "Portfolio Website",
-      description:
-        "Personal portfolio website built with Next.js and TypeScript",
-    },
-    {
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with React and Node.js",
-    },
-    {
-      title: "Weather App",
-      description:
-        "Real-time weather application using weather API integration",
-    },
-    {
-      title: "Task Manager",
-      description:
-        "Simple and efficient task management application with React",
-    },
-  ];
+  const { projects, fetchProjects } = sanityStore();
+  const { setCursorVariant } = appStore();
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        await fetchProjects();
+      } catch (error) {
+        console.log("Error encountered when fetching:", error);
+      }
+    };
+    loadProjects();
+  }, [fetchProjects]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center py-32">
       <h1 className="font-bold text-8xl mb-4">PROJECTS</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-40 mt-20 p-6 ">
-        {project.map((item, index) => (
-          <Card key={index} className="border-none">
-            <h3>{item.title}</h3>
-            <h3>{item.description}</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-16 mt-20 p-6 ">
+        {projects?.map((project, index) => (
+          <Card
+            key={index}
+            className="border-none relative group overflow-hidden"
+            onMouseEnter={() => setCursorVariant("hover")}
+            onMouseLeave={() => setCursorVariant("default")}
+          >
+            <div className="relative ">
+              <img
+                src={project?.mainImage?.asset?.url}
+                alt={project.mainImage.alt}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 25vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-110 "
+              />
+            </div>
+            <div className="absolute inset-0 bg-black/85 flex flex-col p-6 opacity-0 hover:opacity-65 transition-opacity duration-300">
+              <CardHeader>
+                <CardTitle className="text-4xl font-semibold text-white mb-2">
+                  {project.title}
+                </CardTitle>
+                <CardDescription>{project.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <PortableText value={project.body} />
+              </CardContent>
+            </div>
           </Card>
         ))}
       </div>
