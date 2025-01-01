@@ -2,9 +2,6 @@ import sanityClient from "@/Client";
 import { create } from "zustand";
 
 // Define interfaces for better type safety
-interface Author {
-  name: string;
-}
 
 interface Image {
   asset: {
@@ -17,10 +14,10 @@ interface Image {
 interface Project {
   title: string;
   description: string;
-  author: Author;
   slug: any;
   mainImage: Image;
   body: any;
+  projectUrl: string;
 }
 
 interface SanityStore {
@@ -36,10 +33,8 @@ export const sanityStore = create<SanityStore>((set) => ({
     const PROJECTS_QUERY = `*[_type == "post"] | order(_createdAt asc) [0...4]{
             title, 
             description,  
-            author ->{
-                name,
-            }, 
             slug, 
+            projectUrl,
             mainImage{
                 asset->{
                     _id, 

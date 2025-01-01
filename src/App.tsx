@@ -15,8 +15,8 @@ function App() {
 
   // Parallax effect
   useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY;
+    const handleScroll = (): void => {
+      const scrolled: number = window.scrollY;
 
       if (homeRef.current) {
         homeRef.current.style.transform = `translateY(${scrolled * -0.1}px)`;

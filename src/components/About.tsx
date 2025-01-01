@@ -4,7 +4,7 @@ import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { appStore } from "@/Store/appStore";
 function About() {
-  const skills = [
+  const skills: string[] = [
     "React",
     "TypeScript",
     "Tailwind CSS",

@@ -141,16 +141,16 @@ function Nav() {
 export default Nav;
 
 export function Top() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   useEffect(() => {
-    const isDark = localStorage.getItem("theme") === "dark";
+    const isDark: boolean = localStorage.getItem("theme") === "dark";
     setIsDarkMode(isDark);
     document.documentElement.classList.toggle("dark", isDark);
   }, []);
 
-  const toggleTheme = () => {
-    const newIsDark = !isDarkMode;
+  const toggleTheme = (): void => {
+    const newIsDark: boolean = !isDarkMode;
     setIsDarkMode(newIsDark);
     localStorage.setItem("theme", newIsDark ? "dark" : "light");
     document.documentElement.classList.toggle("dark", newIsDark);
