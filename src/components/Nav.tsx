@@ -2,9 +2,12 @@
 
 import { appStore } from "@/Store/appStore";
 import { Button } from "./ui/button";
-import { Menu, X, MoveRight } from "lucide-react";
+import { Menu, X, MoveRight, Moon, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect, useRef } from "react";
+import XIcon from "@mui/icons-material/X";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 function Nav() {
   const { isNavOpen, setIsNavOpen, setActiveSection, setCursorVariant } =
@@ -69,7 +72,7 @@ function Nav() {
         ref={navRef}
         className={`
       fixed top-0 right-0 h-full bg-black dark:bg-white backdrop-blur-lg
-      w-80 z-40 transform transition-transform duration-300
+      w-96 z-40 transform transition-transform duration-300
       ${isNavOpen ? "translate-x-0" : "translate-x-full"}
     `}
       >
@@ -81,7 +84,7 @@ function Nav() {
           >
             <X className="text-black dark:text-white" />
           </Button>
-          <div className="flex flex-col gap-20">
+          <div className="flex items-start flex-col gap-20">
             {["Home", "About", "Projects", "Contact"].map((item) => (
               <Button
                 variant="link"
@@ -99,9 +102,35 @@ function Nav() {
                 }}
               >
                 {" "}
-                <span>{item}</span>
+                <span className="text-5xl text-left">{item}</span>
               </Button>
             ))}
+          </div>
+          <div className="text-black flex justify-around mt-20">
+            <a
+              href="https://github.com/Proton-number"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GitHubIcon
+                className="text-background"
+                aria-label="GitHub icon"
+              />
+            </a>
+            <a
+              href="https://x.com/Dacron4show?t=-XZuMFlvkKQK5xz1w-NrSA&s=09"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <XIcon className="text-background" />
+            </a>
+            <a
+              href="https://www.instagram.com/dacron4show/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <InstagramIcon className="text-background" />
+            </a>
           </div>
         </div>
       </nav>
@@ -112,9 +141,32 @@ function Nav() {
 export default Nav;
 
 export function Top() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const isDark = localStorage.getItem("theme") === "dark";
+    setIsDarkMode(isDark);
+    document.documentElement.classList.toggle("dark", isDark);
+  }, []);
+
+  const toggleTheme = () => {
+    const newIsDark = !isDarkMode;
+    setIsDarkMode(newIsDark);
+    localStorage.setItem("theme", newIsDark ? "dark" : "light");
+    document.documentElement.classList.toggle("dark", newIsDark);
+  };
   return (
     <div className="p-5 flex justify-between items-center">
-      <h2 className="font-bold text-xl">Dacron</h2>
+      <div>
+        <Button size={"icon"} onClick={toggleTheme}>
+          <Sun
+            className={`h-5 w-5 transition-all ${isDarkMode ? "rotate-90 scale-0" : "rotate-0 scale-100"}`}
+          />
+          <Moon
+            className={`absolute h-5 w-5 transition-all ${isDarkMode ? "rotate-0 scale-100" : "rotate-90 scale-0"}`}
+          />
+        </Button>
+      </div>
 
       <div className="flex gap-7 items-center">
         <p

@@ -44,7 +44,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="transition-colors duration-300 ease">
       <Nav />
       <Top />
       <CustomCursor />
@@ -61,9 +61,6 @@ function App() {
         <section id="contact" ref={contactRef}>
           <Contact />
         </section>
-        <footer className="py-8 text-center text-gray-600 dark:text-gray-300">
-          <p>© 2024 Dacron. All rights reserved.</p>
-        </footer>
       </ThemeProvider>
     </div>
   );

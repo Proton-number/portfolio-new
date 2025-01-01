@@ -27,9 +27,11 @@ function Projects() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center py-32">
-      <h1 className="font-bold text-8xl mb-4">PROJECTS</h1>
+      <h1 className="text-6xl sm:text-8xl md:text-9xl font-bold mb-4">
+        PROJECTS
+      </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-16 mt-20 p-6 ">
+      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-16 p-6 ">
         {projects?.map((project, index) => (
           <Card
             key={index}
@@ -45,7 +47,7 @@ function Projects() {
                 className="object-cover transition-transform duration-500 group-hover:scale-110 "
               />
             </div>
-            <div className="absolute inset-0 bg-black/85 flex flex-col p-6 opacity-0 hover:opacity-65 transition-opacity duration-300">
+            <div className="absolute inset-0 bg-background flex flex-col sm:p-6 opacity-0 hover:opacity-65 transition-opacity duration-300 ">
               <CardHeader>
                 <CardTitle className="text-4xl font-semibold text-white mb-2">
                   {project.title}
