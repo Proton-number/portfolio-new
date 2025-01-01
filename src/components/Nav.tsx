@@ -190,7 +190,9 @@ export function Top() {
           PROJECTS
         </p>
         <div className="flex gap-1  font-semibold  text-xs items-center hover:opacity-70">
-          <p>LET'S TALK</p>
+          <a href="mailto:favouradebimpe63@gmail.com">
+            <p>LET'S TALK</p>
+          </a>
           <MoveRight size="18px" />
         </div>
       </div>

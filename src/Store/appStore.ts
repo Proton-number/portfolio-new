@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { format } from "date-fns";
 
 interface portfolioStore {
   mousePosition: { x: number; y: number };
@@ -9,6 +10,10 @@ interface portfolioStore {
   setIsNavOpen: (isNavOpen: boolean) => void;
   activeSection: string;
   setActiveSection: (activeSection: string) => void;
+  formattedDate: string;
+  formattedTime: string;
+  greetings: string;
+  updateFormattedDate: () => void;
 }
 export const appStore = create<portfolioStore>((set) => ({
   mousePosition: { x: 0, y: 0 },
@@ -27,5 +32,25 @@ export const appStore = create<portfolioStore>((set) => ({
   activeSection: "home",
   setActiveSection: (activeSection: string) => {
     set({ activeSection });
+  },
+  //logic for time
+  formattedDate: "",
+  formattedTime: "",
+  greetings: "",
+
+  // Action to update the formattedDate
+  updateFormattedDate: () => {
+    const now = new Date();
+    const hour = new Date().getHours();
+    set(() => ({
+      formattedDate: format(now, "EEEE, MMMM do"),
+      formattedTime: format(now, "h:mm a"),
+      greetings:
+        hour < 12
+          ? "Good Morning"
+          : hour < 18
+            ? "Good Afternoon"
+            : "Good Evening",
+    }));
   },
 }));
