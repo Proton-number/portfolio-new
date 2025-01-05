@@ -15,30 +15,29 @@ function Nav() {
   const [visibility, setVisibility] = useState<boolean>(false);
   const navRef = useRef<HTMLElement>(null);
 
-  const toggleVisibility = (): void => {
-    if (window.scrollY > 40) {
-      setVisibility(true);
-    } else {
-      setVisibility(false);
+  // Scroll visibility handling
+  const handleScroll = () => {
+    setVisibility(window.scrollY > 40);
+  };
+
+  // Click outside handling
+  const handleClickOutside = (e: MouseEvent) => {
+    if (
+      isNavOpen &&
+      navRef.current &&
+      !navRef.current.contains(e.target as Node)
+    ) {
+      setIsNavOpen(false);
     }
   };
 
+  // Event listeners
   useEffect(() => {
-    const handleScroll = () => toggleVisibility();
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        navRef.current &&
-        !(navRef.current as HTMLElement).contains(e.target as Node) &&
-        isNavOpen
-      ) {
-        setIsNavOpen(false);
-      }
-    };
-
     window.addEventListener("scroll", handleScroll);
     document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
-      window.removeEventListener("scroll", toggleVisibility);
+      window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isNavOpen]);
@@ -56,7 +55,7 @@ function Nav() {
               duration: 0.3,
               ease: "easeInOut",
             }}
-            className="fixed top-11 right-6 z-50 p-4 "
+            className="fixed top-11 right-6 z-30 p-4 "
           >
             {!isNavOpen && (
               <Button size="icon" onClick={() => setIsNavOpen(true)}>
@@ -102,7 +101,7 @@ function Nav() {
                 }}
               >
                 {" "}
-                <span className="text-5xl text-left">{item}</span>
+                <span className="text-5xl text-left font-bold">{item}</span>
               </Button>
             ))}
           </div>
@@ -143,17 +142,22 @@ export default Nav;
 export function Top() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
+  // Theme management
   useEffect(() => {
-    const isDark: boolean = localStorage.getItem("theme") === "dark";
-    setIsDarkMode(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
+    const savedTheme = localStorage.getItem("theme") === "dark";
+    setIsDarkMode(savedTheme);
+    updateThemeClass(savedTheme);
   }, []);
 
+  const updateThemeClass = (isDark: boolean): void => {
+    document.documentElement.classList.toggle("dark", isDark);
+  };
+
   const toggleTheme = (): void => {
-    const newIsDark: boolean = !isDarkMode;
-    setIsDarkMode(newIsDark);
-    localStorage.setItem("theme", newIsDark ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", newIsDark);
+    const newTheme = !isDarkMode;
+    setIsDarkMode(newTheme);
+    localStorage.setItem("theme", newTheme ? "dark" : "light");
+    updateThemeClass(newTheme);
   };
   return (
     <div className="p-5 flex justify-between items-center">
