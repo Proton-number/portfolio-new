@@ -102,7 +102,7 @@ function Nav() {
               >
                 {" "}
                 <CenterUnderline
-                  className="text-5xl text-left font-bold"
+                  className="text-5xl text-left font-bold "
                   label={item}
                 />
               </Button>

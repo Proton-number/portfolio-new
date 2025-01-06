@@ -7,6 +7,7 @@ function About() {
   const skills: string[] = [
     "React",
     "TypeScript",
+    "Material UI",
     "Tailwind CSS",
     "Next.js",
     "Framer Motion",

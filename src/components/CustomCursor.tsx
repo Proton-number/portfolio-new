@@ -28,7 +28,7 @@ function CustomCursor() {
       >
         <div
           className={`
-          w-4 h-4 bg-white rounded-full
+          w-4 h-4 bg-white rounded-full 
           transition-transform duration-300 ease-out
           ${cursorVariant === "hover" ? "scale-150" : "scale-100"}
         `}
