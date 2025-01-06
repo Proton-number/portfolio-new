@@ -48,7 +48,7 @@ function About() {
             onMouseLeave={() => setCursorVariant("default")}
             onClick={() => {
               const link = document.createElement("a");
-              link.href = "/AdebimpeFavour.pdf"; // Update with your resume file path
+              link.href = "/My Resume.pdf"; // Update with your resume file path
               link.download = "Favour-Resume.pdf"; // Update with your desired filename
               link.click();
             }}

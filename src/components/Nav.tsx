@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from "react";
 import XIcon from "@mui/icons-material/X";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import CenterUnderline from "./animation/CenterUnderline";
 
 function Nav() {
   const { isNavOpen, setIsNavOpen, setActiveSection, setCursorVariant } =
@@ -86,7 +87,6 @@ function Nav() {
           <div className="flex items-start flex-col gap-20">
             {["Home", "About", "Projects", "Contact"].map((item) => (
               <Button
-                variant="link"
                 className="text-secondary"
                 key={item}
                 onMouseEnter={() => setCursorVariant("hover")}
@@ -101,7 +101,10 @@ function Nav() {
                 }}
               >
                 {" "}
-                <span className="text-5xl text-left font-bold">{item}</span>
+                <CenterUnderline
+                  className="text-5xl text-left font-bold"
+                  label={item}
+                />
               </Button>
             ))}
           </div>
@@ -173,26 +176,24 @@ export function Top() {
       </div>
 
       <div className="flex gap-7 items-center">
-        <p
+        <CenterUnderline
           className="hover:opacity-70 text-xs"
           onClick={() =>
             document
               .getElementById("about")
               ?.scrollIntoView({ behavior: "smooth" })
           }
-        >
-          ABOUT ME
-        </p>
-        <p
+          label="ABOUT ME"
+        />
+        <CenterUnderline
           className=" text-xs  hover:opacity-70"
           onClick={() =>
             document
               .getElementById("projects")
               ?.scrollIntoView({ behavior: "smooth" })
           }
-        >
-          PROJECTS
-        </p>
+          label=" PROJECTS"
+        />
         <div className="flex gap-1  font-semibold  text-xs items-center hover:opacity-70">
           <a href="mailto:favouradebimpe63@gmail.com">
             <p>LET'S TALK</p>
