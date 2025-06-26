@@ -23,12 +23,12 @@ function About() {
             Who is Favour?
           </p>
           <p className="text-lg leading-relaxed">
-            I'm a passionate frontend developer with 4 years of experience
-            building modern web applications. I focus on creating clean,
-            efficient, and user-friendly solutions that solve real-world
-            problems. When I am not coding, you can find me watching football,
-            anime, or playing video games. I am always open to new and exciting
-            opportunities.
+            I'm a dedicated frontend developer with a strong background in
+            crafting modern, responsive web applications. My focus is on
+            delivering clean, efficient, and intuitive user experiences that
+            make a real impact. Outside of coding, I enjoy watching football,
+            anime, and playing video games. I'm always eager to learn, grow, and
+            take on new challenges in the tech world.
           </p>
 
           <div className="space-y-4">
